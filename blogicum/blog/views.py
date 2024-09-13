@@ -45,7 +45,9 @@ posts = [
 
 
 def index(request):
-    return render(request, 'blog/index.html', {'posts': posts})
+    reversed_posts = posts[::-1]
+    return render(request, 'blog/index.html', {'posts': reversed_posts})
+
 
 
 def post_detail(request, id):
