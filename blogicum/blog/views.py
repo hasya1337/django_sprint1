@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import Http404
 
 posts = [
     {
@@ -50,9 +49,8 @@ def index(request):
 
 
 def post_detail(request, id):
-    post = get_object_or_404(posts, id=id)
+    post = next((post for post in posts if post['id'] == id), None)
     return render(request, 'blog/detail.html', {'post': post})
-
 
 
 def category_posts(request, category_slug):
