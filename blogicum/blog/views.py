@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.http import Http404
 
 posts = [
@@ -44,7 +44,6 @@ posts = [
     },
 ]
 
-
 def index(request):
     return render(request, 'blog/index.html', {'posts': posts})
 
@@ -57,5 +56,8 @@ def post_detail(request, id):
 
 
 def category_posts(request, category_slug):
-    filtered_posts = [post for post in posts if post['category'] == category_slug]
-    return render(request, 'blog/category.html', {'posts': filtered_posts, 'category_slug': category_slug})
+    filtered_posts = [
+        post for post in posts if post['category'] == category_slug
+                      ]
+    return render(request, 'blog/category.html',
+                  {'posts': filtered_posts, 'category_slug': category_slug})
