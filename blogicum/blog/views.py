@@ -1,7 +1,17 @@
 from django.shortcuts import render
 
-posts = {
-    0: {
+# /app/tests/test_templates.py:41:
+# AssertionError: Убедитесь, что в словаре контекста для страницы `posts/2/`
+# под ключом `post` передаётся словарь с `"id": 2` из списка `posts`.
+# /app/tests/test_views.py:8: AssertionError:
+# Убедитесь, что список с постами `posts`
+# из файла `blog/views.py` соответствуют списку из задания.
+# При попытке поменять список на словарь выдаёт
+# вот эту ошибку на автотестах хотя сайт и тд
+# работают и отображаются корректно
+
+posts = [
+    {
         'id': 0,
         'location': 'Остров отчаянья',
         'date': '30 сентября 1659 года',
@@ -13,7 +23,7 @@ posts = {
                 полумёртвым на берег этого проклятого острова,
                 который назвал островом Отчаяния.''',
     },
-    1: {
+    {
         'id': 1,
         'location': 'Остров отчаянья',
         'date': '1 октября 1659 года',
@@ -29,7 +39,7 @@ posts = {
                 построить баркас, на котором и выбрались бы из этого
                 гиблого места.''',
     },
-    2: {
+    {
         'id': 2,
         'location': 'Остров отчаянья',
         'date': '25 октября 1659 года',
@@ -41,22 +51,21 @@ posts = {
                 Весь этот день я хлопотал  около вещей: укрывал и
                 укутывал их, чтобы не испортились от дождя.''',
     },
-}
+]
 
 
 def index(request):
-    reversed_posts = list(posts.items())[::-1]
+    reversed_posts = posts[::-1]
     return render(request, 'blog/index.html', {'posts': reversed_posts})
 
 
 def post_detail(request, id):
-    post = posts.get(id)
+    post = next((post for post in posts if post['id'] == id), None)
     return render(request, 'blog/detail.html', {'post': post})
 
 
 def category_posts(request, category_slug):
-    filtered_posts = [
-        post for post in posts.values() if post['category'] == category_slug]
+    filtered_posts = [post for post in posts if post['category'] == category_slug]
     return render(
         request,
         'blog/category.html',
