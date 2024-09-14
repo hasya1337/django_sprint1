@@ -44,14 +44,12 @@ posts = {
 
 
 def index(request):
-    reversed_posts = list(posts.values())[::-1]
+    reversed_posts = list(posts.items())[::-1]
     return render(request, 'blog/index.html', {'posts': reversed_posts})
 
 
 def post_detail(request, id):
     post = posts.get(id)
-    if post is None:
-        raise Http404("Post not found")
     return render(request, 'blog/detail.html', {'post': post})
 
 
