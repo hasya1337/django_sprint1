@@ -9,11 +9,11 @@
     <h1>Лента записей</h1>
     <!-- Перебираем в цикле все посты в обратном порядке -->
     <hr>
-    {% for key, post in posts.items %}
+    {% for key, post in posts %}
     <article>
         <ul>
-            <li>Место: {{ key.location }}</li>
-            <li>Дата: {{ key.date }}</li>
+            <li>Место: {{ post.location }}</li>
+            <li>Дата: {{ post.date }}</li>
             <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
         </ul>
         <!-- Первые 10 слов -->
