@@ -16,7 +16,7 @@ posts = [
                 Весь экипаж, кроме меня, утонул; я же, 
                 несчастный Робинзон Крузо, был выброшен 
                 полумёртвым на берег этого проклятого острова, 
-                который назвал островом Отчаяния.''',
+                который назвал островом Отчаяния.'''
     },
     {
         'id': 1,
@@ -32,7 +32,7 @@ posts = [
                 Мне всё думалось, что, останься мы на корабле, мы 
                 непременно спаслись бы. Теперь из его обломков мы могли бы 
                 построить баркас, на котором и выбрались бы из этого 
-                гиблого места.''',
+                гиблого места.'''
     },
     {
         'id': 2,
@@ -42,25 +42,22 @@ posts = [
         'text': '''Всю ночь и весь день шёл дождь и дул сильный 
                 порывистый ветер. 25 октября.  Корабль за ночь разбило 
                 в щепки; на том месте, где он стоял, торчат какие-то 
-                жалкие обломки,  да и те видны только во время отлива. 
-                Весь этот день я хлопотал  около вещей: укрывал и 
-                укутывал их, чтобы не испортились от дождя.''',
-    },
+                жалкие обломки, да и те видны только во время отлива. 
+                Весь этот день я хлопотал около вещей: укрывал и 
+                укутывал их, чтобы не испортились от дождя.'''
+    }
 ]
-
 
 def index(request):
     reversed_posts = posts[::-1]
     return render(request, 'blog/index.html', {'posts': reversed_posts})
 
-
 def post_detail(request, id):
     post = next((post for post in posts if post['id'] == id), None)
     return render(request, 'blog/detail.html', {'post': post})
 
-
 def category_posts(request, category_slug):
-    filtered_posts = [
-        post for post in posts if post['category'] == category_slug]
-    return render(request, 'blog/category.html',
-                  {'posts': filtered_posts, 'category_slug': category_slug})
+    filtered_posts = [post for post in posts if post['category'] == category_slug]
+    return render(request, 'blog/category.html', {'posts': filtered_posts, 'category_slug': category_slug})
+
+# Remove trailing whitespace and add a newline at the end of the file.
