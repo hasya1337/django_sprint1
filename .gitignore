@@ -152,3 +152,6 @@ media/
 build_tests/
 yap_testing
 blogicum/static/img/img/
+
+*css
+django_sprint1/html

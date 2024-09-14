@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.http import Http404
 
-posts = [
-    {
-        'id': 0,
+
+posts = {
+    0: {
         'location': 'Остров отчаянья',
         'date': '30 сентября 1659 года',
         'category': 'travel',
@@ -13,8 +14,7 @@ posts = [
                 полумёртвым на берег этого проклятого острова,
                 который назвал островом Отчаяния.''',
     },
-    {
-        'id': 1,
+    1: {
         'location': 'Остров отчаянья',
         'date': '1 октября 1659 года',
         'category': 'not-my-day',
@@ -29,33 +29,32 @@ posts = [
                 построить баркас, на котором и выбрались бы из этого
                 гиблого места.''',
     },
-    {
-        'id': 2,
+    2: {
         'location': 'Остров отчаянья',
         'date': '25 октября 1659 года',
         'category': 'not-my-day',
         'text': '''Всю ночь и весь день шёл дождь и дул сильный
                 порывистый ветер. 25 октября.  Корабль за ночь разбило
                 в щепки; на том месте, где он стоял, торчат какие-то
-                жалкие обломки,  да и те видны только во время отлива.
+                жалкие обломки, да и те видны только во время отлива.
                 Весь этот день я хлопотал  около вещей: укрывал и
                 укутывал их, чтобы не испортились от дождя.''',
     },
-]
+}
 
 
 def index(request):
-    reversed_posts = posts[::-1]
+    reversed_posts = list(posts.values())[::-1]
     return render(request, 'blog/index.html', {'posts': reversed_posts})
 
 
 def post_detail(request, id):
-    post = next((post for post in posts if post['id'] == id), None)
+    post = posts.get(id)
+    if post is None:
+        raise Http404("Post not found")
     return render(request, 'blog/detail.html', {'post': post})
 
 
 def category_posts(request, category_slug):
-    filtered_posts = [
-        post for post in posts if post['category'] == category_slug]
-    return render(request, 'blog/category.html',
-                  {'posts': filtered_posts, 'category_slug': category_slug})
+    filtered_posts = [post for post in posts.values() if post['category'] == category_slug]
+    return render(request, 'blog/category.html', {'posts': filtered_posts, 'category_slug': category_slug})
