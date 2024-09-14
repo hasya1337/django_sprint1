@@ -1,8 +1,8 @@
-from django.http import Http404
 from django.shortcuts import render
 
 posts = {
     0: {
+        'id': 0,
         'location': 'Остров отчаянья',
         'date': '30 сентября 1659 года',
         'category': 'travel',
@@ -14,6 +14,7 @@ posts = {
                 который назвал островом Отчаяния.''',
     },
     1: {
+        'id': 1,
         'location': 'Остров отчаянья',
         'date': '1 октября 1659 года',
         'category': 'not-my-day',
@@ -29,6 +30,7 @@ posts = {
                 гиблого места.''',
     },
     2: {
+        'id': 2,
         'location': 'Остров отчаянья',
         'date': '25 октября 1659 года',
         'category': 'not-my-day',
@@ -49,9 +51,8 @@ def index(request):
 
 def post_detail(request, id):
     post = posts.get(id)
-    if post is None:
-        raise Http404("Post not found")
     return render(request, 'blog/detail.html', {'post': post})
+
 
 
 def category_posts(request, category_slug):
