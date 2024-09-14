@@ -1,5 +1,10 @@
 from django.shortcuts import render
 
+# /app/tests/test_templates.py:41: AssertionError: Убедитесь, что в словаре контекста для страницы `posts/2/` под
+# ключом `post` передаётся словарь с `"id": 2` из списка `posts`. /app/tests/test_views.py:8: AssertionError:
+# Убедитесь, что список с постами `posts` из файла `blog/views.py` соответствуют списку из задания.
+# не получается пройти автотесты если изменить список posts на словарь
+
 posts = [
     {
         'id': 0,
