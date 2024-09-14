@@ -6,22 +6,21 @@
 
 {% block content %}
 <div class="container py-5">
-            <h1>Лента записей</h1>
-            <!-- Перебираем в цикле все посты в обратном порядке -->
-            <hr>
-            {% for post in posts %}
-            <article>
-                <ul>
-                    <li>Место: {{ post.location }}</li>
-                    <li>Дата: {{ post.date }}</li>
-                    <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
-                </ul>
-                <!-- Первые 10 слов -->
-                <p>{{ post.text|truncatewords:10 }}{% if post.text|length > 10 %}{% endif %}</p>
-                <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
-            </article>
-            <hr>
-            {% endfor %}
-        </div>
-
+    <h1>Лента записей</h1>
+    <!-- Перебираем в цикле все посты в обратном порядке -->
+    <hr>
+    {% for key, post in posts.items %}
+    <article>
+        <ul>
+            <li>Место: {{ key.location }}</li>
+            <li>Дата: {{ key.date }}</li>
+            <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
+        </ul>
+        <!-- Первые 10 слов -->
+        <p>{{ post.text|truncatewords:10 }}{% if post.text|length > 10 %}{% endif %}</p>
+        <a href="{% url 'blog:post_detail' key %}">Читать полный текст</a>
+    </article>
+    <hr>
+    {% endfor %}
+</div>
 {% endblock %}
