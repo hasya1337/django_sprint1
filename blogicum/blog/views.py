@@ -1,7 +1,5 @@
 from django.shortcuts import render
 
-
-
 posts = {
     0: {
         'location': 'Остров отчаянья',
