@@ -1,11 +1,8 @@
 {% if show_full_text %}
-    <!-- Отобразить полный текст поста -->
     <p>{{ post.text|linebreaks }}</p>
 {% else %}
-    <!-- Отобразить только краткий текст поста -->
     <p>{{ post.text|truncatewords:10 }}</p>
 {% endif %}
-<!-- Другие данные поста -->
 <ul>
     <li>Место: {{ post.location }}</li>
     <li>Дата: {{ post.date }}</li>

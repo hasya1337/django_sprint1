@@ -7,7 +7,6 @@
 {% block content %}
     <div class="container py-5">
         <h1>Лента записей</h1>
-        <!-- Перебираем в цикле все посты -->
         <hr>
         {% for post in posts %}
             {% include "includes/post_card.html" with post=post show_full_text=False %}
