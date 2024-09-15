@@ -1,15 +1,6 @@
 from django.shortcuts import render
 
-# /app/tests/test_templates.py:41:
-# AssertionError: Убедитесь, что в словаре контекста для страницы `posts/2/`
-# под ключом `post` передаётся словарь с `"id": 2` из списка `posts`.
-# /app/tests/test_views.py:8: AssertionError:
-# Убедитесь, что список с постами `posts`
-# из файла `blog/views.py` соответствуют списку из задания.
-# При попытке поменять список на словарь выдаёт
-# вот эту ошибку на автотестах хотя сайт и тд
-# работают и отображаются корректно
-
+# Список постов
 posts = [
     {
         'id': 0,
@@ -53,6 +44,8 @@ posts = [
     },
 ]
 
+posts_by_id = {post['id']: post for post in posts}
+
 
 def index(request):
     reversed_posts = posts[::-1]
@@ -61,13 +54,13 @@ def index(request):
 
 def post_detail(request, id):
     post = next((post for post in posts if post['id'] == id), None)
-    return render(request, 'blog/detail.html', {'post': post})
+    return render(request, 'blog/detail.html', {'post': post, 'show_full_text': True})
 
 
 def category_posts(request, category_slug):
-    filtered_posts = [
-        post for post in posts if post['category'] == category_slug]
+    filtered_posts = [post for post in posts if post['category'] == category_slug]
     return render(
         request,
         'blog/category.html',
-        {'posts': filtered_posts, 'category_slug': category_slug})
+        {'posts': filtered_posts, 'category_slug': category_slug}
+    )
