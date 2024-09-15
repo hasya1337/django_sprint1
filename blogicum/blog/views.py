@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-# Список постов
+
 posts = [
     {
         'id': 0,
@@ -54,11 +54,15 @@ def index(request):
 
 def post_detail(request, id):
     post = next((post for post in posts if post['id'] == id), None)
-    return render(request, 'blog/detail.html', {'post': post, 'show_full_text': True})
+    return render(
+        request,
+        'blog/detail.html',
+        {'post': post, 'show_full_text': True})
 
 
 def category_posts(request, category_slug):
-    filtered_posts = [post for post in posts if post['category'] == category_slug]
+    filtered_posts = [
+        post for post in posts if post['category'] == category_slug]
     return render(
         request,
         'blog/category.html',
