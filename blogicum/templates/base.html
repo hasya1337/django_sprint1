@@ -16,11 +16,10 @@
       {% include "includes/header.html" %}
     </header>
     <main>
-
-      {% block content %} {% endblock %}
+      <div class="container py-5">
+        {% block content %} {% endblock %}
+      </div>
     </main>
-      <footer>
     {% include "includes/footer.html" %}
-      </footer>
   </body>
 </html>

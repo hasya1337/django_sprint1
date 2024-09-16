@@ -5,7 +5,5 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container py-5">
-        {% include "includes/post_card.html" with post=post show_full_text=True %}
-    </div>
+    {% include "includes/post_card.html" with post=post show_full_text=True %}
 {% endblock %}
