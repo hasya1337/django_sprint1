@@ -1,12 +1,14 @@
-{% if show_full_text %}
-    <p>{{ post.text|linebreaks }}</p>
-{% else %}
-    <p>{{ post.text|truncatewords:10 }}</p>
-{% endif %}
-<ul>
-    <li>Место: {{ post.location }}</li>
-    <li>Дата: {{ post.date }}</li>
-    <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
-</ul>
-<a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
-<!-- не очень понимаю про потерю части кода -->
+<article>
+  {% if show_full_text %}
+      <p>{{ post.text|linebreaks }}</p>
+  {% else %}
+      <p>{{ post.text|truncatewords:10 }}</p>
+  {% endif %}
+  <ul>
+      <li>Место: {{ post.location }}</li>
+      <li>Дата: {{ post.date }}</li>
+      <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
+  </ul>
+  <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+</article>
+
